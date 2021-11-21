@@ -29,9 +29,12 @@ export default function move(list: List, source: string, destination: string): L
   });
 
   destinationIndex = list.findIndex((item) => item.id === destination);
-  if (destinationIndex < 0) throw new Error('You cannot specify a file as the destination');
-  if (list[destinationIndex].files.findIndex((item) => item.name === sourceFile.name) >= 0)
+  if (destinationIndex < 0) {
+    throw new Error('You cannot specify a file as the destination');
+  }
+  if (list[destinationIndex].files.findIndex((item) => item.name === sourceFile.name) >= 0) {
     throw new Error('You cannot move two files with the same name into the same folder.');
+  }
   list[destinationIndex].files.push(sourceFile);
   return list;
 }
